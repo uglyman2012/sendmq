@@ -30,9 +30,8 @@ public class TestController {
     @ApiOperation("test1测试")
     public String test1() {
         SysPersonalInfo sysPersonalInfo = new SysPersonalInfo();
-        sysPersonalInfo.setCustomerFzCode("666");
-        sysPersonalInfo.setCustomerCrmCode("pppppppppp9");
-        sysPersonalInfo.setPersonalmobie("");
+        sysPersonalInfo.setId("9666");
+        sysPersonalInfo.setPersonalName("pppp");
         sendService.send("SysPersonalInfoVO", sysPersonalInfo);
         return "success";
     }
