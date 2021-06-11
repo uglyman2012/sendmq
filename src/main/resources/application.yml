@@ -6,10 +6,18 @@ spring:
   application:
     name: rabbitmq-spring
   rabbitmq:
-    host: 10.73.129.235
+    host: 10.68.244.130
     port: 5672
-    username: root
-    password: tcl@2018
+    username: test
+    password: 123456
+#    template:
+#      mandatory: true
+#      retry:
+#        enabled: true       #重试
+#        max-attempts: 2
+#        initial-interval: 1000
+#        max-interval: 5000
+#        multiplier: 2
     output:
       ansi:
         enabled: ALWAYS
@@ -28,4 +36,13 @@ spring:
     ansi:
       enabled: ALWAYS
 
+redis:
+  url: redis://127.0.0.1:6379
+  timeout: 5s
+  lettuce:
+    pool:
+      max-active: 1000
+      max-idle: 20
+      min-idle: 0
+      max-wait: 5s
 
