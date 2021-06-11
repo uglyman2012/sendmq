@@ -1,0 +1,31 @@
+# 应用服务 WEB 访问端口
+server:
+  port: 8081
+# 应用名称
+spring:
+  application:
+    name: rabbitmq-spring
+  rabbitmq:
+    host: 10.73.129.235
+    port: 5672
+    username: root
+    password: tcl@2018
+    output:
+      ansi:
+        enabled: ALWAYS
+
+  cloud:
+    config:
+      enabled: false
+      fail-fast: true
+    stream:
+      defaultBinder: rabbit
+      bindings:
+        output:
+          destination: reportOrder-dev
+          content-type: application/json
+  output:
+    ansi:
+      enabled: ALWAYS
+
+
