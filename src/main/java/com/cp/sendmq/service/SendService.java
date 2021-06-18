@@ -22,6 +22,9 @@ public class SendService {
     private Source source;
 
     public void send(String header, Object payload) {
+        //MessageProperties messageProperties = new MessageProperties();
+        //messageProperties.setExpiration("50");
+        //Message message = new Message();
         boolean payload_simple_name = source.output().send(MessageBuilder.withPayload(payload)
                 .setHeader("payload_simple_name", header)
                 .build());
