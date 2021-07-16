@@ -39,7 +39,7 @@ public class SwaggerConfiguration {
                 .paths(PathSelectors.any())
                 .build();
 
-        System.out.println("swagger 地址:  http://" + InetAddress.getLocalHost().getHostAddress() + ":8081/doc.html");
+        System.out.println("swagger 地址:  http://" + InetAddress.getLocalHost().getHostAddress() + ":9081/doc.html");
         return docket;
     }
 
