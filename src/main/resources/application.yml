@@ -35,14 +35,16 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
-
-redis:
-  url: redis://127.0.0.1:6379
-  timeout: 5s
-  lettuce:
-    pool:
-      max-active: 1000
-      max-idle: 20
-      min-idle: 0
-      max-wait: 5s
+  data:
+    mongodb:
+      uri: mongodb://priceUser:123456@10.73.129.235:27017/ability_price
+  redis:
+    url: redis://127.0.0.1:6379
+    timeout: 5s
+    lettuce:
+      pool:
+        max-active: 1000
+        max-idle: 20
+        min-idle: 0
+        max-wait: 5s
 

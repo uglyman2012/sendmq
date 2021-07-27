@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class SysPersonalInfo implements Serializable {
 
@@ -21,6 +22,9 @@ public class SysPersonalInfo implements Serializable {
     @NotNull
     private String personalName;
 
+    @ApiModelProperty(value = "过期时间", required = true)
+    private LocalDateTime expireAt;
+
     public String getId() {
         return id;
     }
@@ -35,5 +39,13 @@ public class SysPersonalInfo implements Serializable {
 
     public void setPersonalName(String personalName) {
         this.personalName = personalName;
+    }
+
+    public LocalDateTime getExpireAt() {
+        return expireAt;
+    }
+
+    public void setExpireAt(LocalDateTime expireAt) {
+        this.expireAt = expireAt;
     }
 }
