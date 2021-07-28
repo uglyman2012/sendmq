@@ -1,5 +1,7 @@
 package com.cp.sendmq;
 
+import com.cp.sendmq.bean.Order;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.amqp.AmqpException;
@@ -91,4 +93,43 @@ public class SendmqApplicationTests {
         rabbitTemplate.convertAndSend("topic002", "rabbit.abc", "hello object message send!");
     }
 
+    @Test
+    public void testSendJsonMessage() throws Exception {
+
+        Order order = new Order();
+        order.setId("001");
+        order.setName("消息订单");
+        order.setContent("描述信息");
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(order);
+        System.err.println("order 4 json: " + json);
+
+        MessageProperties messageProperties = new MessageProperties();
+        //这里注意一定要修改contentType为 application/json
+        messageProperties.setContentType("application/json");
+        Message message = new Message(json.getBytes(), messageProperties);
+
+        rabbitTemplate.send("topic001", "spring.order", message);
+    }
+
+    @Test
+    public void testSendJavaMessage() throws Exception {
+
+        Order order = new Order();
+        order.setId("001");
+        order.setName("订单消息");
+        order.setContent("订单描述信息");
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(order);
+        System.err.println("order 4 json: " + json);
+
+        MessageProperties messageProperties = new MessageProperties();
+        //这里注意一定要修改contentType为 application/json
+        messageProperties.setContentType("application/json");
+        //添加typeid 与类的全路径
+        messageProperties.getHeaders().put("__TypeId__", "order");
+        Message message = new Message(json.getBytes(), messageProperties);
+
+        rabbitTemplate.send("topic001", "spring.order", message);
+    }
 }
