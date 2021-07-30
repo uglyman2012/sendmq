@@ -1,6 +1,7 @@
 package com.cp.sendmq;
 
 import com.cp.sendmq.bean.Order;
+import com.cp.sendmq.service.mq.RabbitSender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,6 +26,8 @@ public class SendmqApplicationTests {
     @Autowired
     private RabbitAdmin rabbitAdmin;
 
+    @Autowired
+    private RabbitSender rabbitSender;
     @Test
     public void testAdmin() throws Exception {
         //直连监听
@@ -131,5 +137,15 @@ public class SendmqApplicationTests {
         Message message = new Message(json.getBytes(), messageProperties);
 
         rabbitTemplate.send("topic001", "spring.order", message);
+    }
+
+    @Test
+    public void testSender1() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("number", "12345");
+        properties.put("send_time", simpleDateFormat.format(new Date()));
+        rabbitSender.send("Hello RabbitMQ For Spring Boot!", properties);
+        Thread.sleep(20000);
     }
 }

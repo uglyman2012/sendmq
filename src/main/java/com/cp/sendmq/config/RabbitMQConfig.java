@@ -27,6 +27,8 @@ public class RabbitMQConfig {
         connectionFactory.setUsername("test");
         connectionFactory.setPassword("123456");
         //connectionFactory.setVirtualHost("/vhost_cp");
+        connectionFactory.setPublisherConfirms(true);
+        connectionFactory.setPublisherReturns(true);
         return connectionFactory;
     }
 
@@ -41,6 +43,7 @@ public class RabbitMQConfig {
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMandatory(true);
         return rabbitTemplate;
     }
 }

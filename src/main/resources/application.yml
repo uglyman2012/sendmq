@@ -18,23 +18,21 @@ spring:
 #        initial-interval: 1000
 #        max-interval: 5000
 #        multiplier: 2
-    output:
-      ansi:
-        enabled: ALWAYS
 
-  cloud:
-    config:
-      enabled: false
-      fail-fast: true
-    stream:
-      defaultBinder: rabbit
-      bindings:
-        output:
-          destination: reportOrder-dev
-          content-type: application/json
-  output:
-    ansi:
-      enabled: ALWAYS
+
+  #  cloud:
+  #    config:
+  #      enabled: false
+  #      fail-fast: true
+  #    stream:
+  #      defaultBinder: rabbit
+  #      bindings:
+  #        output:
+  #          destination: reportOrder-dev
+  #          content-type: application/json
+  #  output:
+  #    ansi:
+  #      enabled: ALWAYS
   data:
     mongodb:
       uri: mongodb://priceUser:123456@10.73.129.235:27017/ability_price

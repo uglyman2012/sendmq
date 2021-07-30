@@ -28,6 +28,8 @@ public class RabbitMQConfig2 {
         connectionFactory.setAddresses("10.68.244.130:5672");
         connectionFactory.setUsername("test");
         connectionFactory.setPassword("123456");
+        connectionFactory.setPublisherConfirms(true);
+        connectionFactory.setPublisherReturns(true);
         return connectionFactory;
     }
 
@@ -69,6 +71,10 @@ public class RabbitMQConfig2 {
     }
 
     @Bean
+    public TopicExchange exchange003() {
+        return new TopicExchange("topic003", true, false);
+    }
+    @Bean
     public Queue queue002() {
         return new Queue("queue002", true); //队列持久
     }
@@ -86,6 +92,6 @@ public class RabbitMQConfig2 {
     @Bean
     public Binding binding003() {
         //同一个Exchange绑定了2个队列
-        return BindingBuilder.bind(queue003()).to(exchange001()).with("mq.*");
+        return BindingBuilder.bind(queue003()).to(exchange003()).with("springboot.*");
     }
 }
