@@ -145,7 +145,11 @@ public class SendmqApplicationTests {
         Map<String, Object> properties = new HashMap<>();
         properties.put("number", "12345");
         properties.put("send_time", simpleDateFormat.format(new Date()));
-        rabbitSender.send("Hello RabbitMQ For Spring Boot!", properties);
+        Order order = new Order();
+        order.setId("001");
+        order.setName("订单消息");
+        order.setContent("订单描述信息");
+        rabbitSender.send2(order, properties);
         Thread.sleep(20000);
     }
 }

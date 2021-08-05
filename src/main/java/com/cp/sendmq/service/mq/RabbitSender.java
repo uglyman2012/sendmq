@@ -1,5 +1,6 @@
 package com.cp.sendmq.service.mq;
 
+import com.cp.sendmq.bean.Order;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +63,19 @@ public class RabbitSender {
         //id + 时间戳 全局唯一  用于ack保证唯一一条消息,这边做测试写死一个。但是在做补偿策略的时候，必须保证这是全局唯一的消息
         CorrelationData correlationData = new CorrelationData("12345678901");
         rabbitTemplate.convertAndSend("topic003", "springboot.abc", msg, correlationData);
+    }
+
+    public void send2(Order message, Map<String, Object> properties) throws Exception {
+        MessageHeaders mhs = new MessageHeaders(properties);
+        //String s = JSONObject.toJSONString(message);
+        //Message msg = MessageBuilder.createMessage(s, mhs);
+        //org.springframework.amqp.core.Message build = org.springframework.amqp.core.MessageBuilder.withBody(s.getBytes()).setContentType(MessageProperties.CONTENT_TYPE_JSON).build();
+        rabbitTemplate.setConfirmCallback(confirmCallback);
+        rabbitTemplate.setReturnCallback(returnCallback);
+
+        //id + 时间戳 全局唯一  用于ack保证唯一一条消息,这边做测试写死一个。但是在做补偿策略的时候，必须保证这是全局唯一的消息
+        CorrelationData correlationData = new CorrelationData("12345678901");
+        rabbitTemplate.convertAndSend("topic002", "springboot.abc", message, correlationData);
     }
 
 }
