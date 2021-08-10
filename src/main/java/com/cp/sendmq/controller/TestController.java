@@ -1,8 +1,10 @@
 package com.cp.sendmq.controller;
 
 
+import com.cp.sendmq.bean.Order;
 import com.cp.sendmq.bean.SysPersonalInfo;
 import com.cp.sendmq.service.SendService;
+import com.cp.sendmq.service.mq.RabbitSender;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.core.Message;
@@ -12,6 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,6 +38,9 @@ public class TestController {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private RabbitSender rabbitSender;
+
     //@Autowired
     //private Sender sender;
     @GetMapping("/test1")
@@ -46,7 +56,7 @@ public class TestController {
 
     @GetMapping("/test2")
     @ApiOperation("test2测试")
-    public String test() {
+    public String test2() {
         MessageProperties messageProperties = new MessageProperties();
         messageProperties.setContentType("text/plain");
         Message message = new Message("mq 消息1234".getBytes(), messageProperties);
@@ -54,6 +64,21 @@ public class TestController {
         rabbitTemplate.send("topic001", "spring.abc", message);
 
         rabbitTemplate.convertAndSend("topic001", "spring.amqp", "hello object message send!");
+        return "success";
+    }
+
+    @GetMapping("/test3")
+    @ApiOperation("test3测试")
+    public String test3() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Map<String, Object> properties = new HashMap<>();
+        properties.put("number", "12345");
+        properties.put("send_time", simpleDateFormat.format(new Date()));
+        Order order = new Order();
+        //order.setId("661");
+        order.setName("订单消息");
+        order.setContent("订单描述信息");
+        rabbitSender.send2(order, properties);
         return "success";
     }
 }

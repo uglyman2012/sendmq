@@ -1,5 +1,7 @@
 package com.cp.sendmq.bean;
 
+import java.io.Serializable;
+
 /**
  * <p>
  *
@@ -8,7 +10,8 @@ package com.cp.sendmq.bean;
  * @author yang
  * @since 2021/07/28
  */
-public class Order {
+public class Order implements Serializable {
+    private static final long serialVersionUID = -9204232234647248342L;
     private String id;
     private String name;
     private String content;

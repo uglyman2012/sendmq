@@ -65,7 +65,7 @@ public class RabbitSender {
         rabbitTemplate.convertAndSend("topic003", "springboot.abc", msg, correlationData);
     }
 
-    public void send2(Order message, Map<String, Object> properties) throws Exception {
+    public void send2(Order message, Map<String, Object> properties) {
         MessageHeaders mhs = new MessageHeaders(properties);
         //String s = JSONObject.toJSONString(message);
         //Message msg = MessageBuilder.createMessage(s, mhs);
