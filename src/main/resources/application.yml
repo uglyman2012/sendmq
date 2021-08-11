@@ -5,6 +5,14 @@ server:
 spring:
   application:
     name: rabbitmq-spring
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    #    url: jdbc:mysql://127.0.0.1:3306/nretail_ability_marketing?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/本地?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+
   rabbitmq:
     host: 10.68.244.130
     port: 5672

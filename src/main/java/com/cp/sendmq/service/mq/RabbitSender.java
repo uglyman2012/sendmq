@@ -1,6 +1,6 @@
 package com.cp.sendmq.service.mq;
 
-import com.cp.sendmq.bean.Order;
+import com.cp.sendmq.entity.Order;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.support.CorrelationData;
 import org.springframework.beans.factory.annotation.Autowired;

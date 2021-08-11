@@ -1,7 +1,7 @@
 package com.cp.sendmq.mongdb;
 
 
-import com.cp.sendmq.bean.SysPersonalInfo;
+import com.cp.sendmq.entity.SysPersonalInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

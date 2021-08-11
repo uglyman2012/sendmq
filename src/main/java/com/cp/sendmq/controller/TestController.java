@@ -1,8 +1,8 @@
 package com.cp.sendmq.controller;
 
 
-import com.cp.sendmq.bean.Order;
-import com.cp.sendmq.bean.SysPersonalInfo;
+import com.cp.sendmq.entity.Order;
+import com.cp.sendmq.entity.SysPersonalInfo;
 import com.cp.sendmq.service.SendService;
 import com.cp.sendmq.service.mq.RabbitSender;
 import io.swagger.annotations.Api;

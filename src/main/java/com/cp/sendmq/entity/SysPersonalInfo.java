@@ -1,4 +1,4 @@
-package com.cp.sendmq.bean;
+package com.cp.sendmq.entity;
 
 import io.swagger.annotations.ApiModelProperty;
 

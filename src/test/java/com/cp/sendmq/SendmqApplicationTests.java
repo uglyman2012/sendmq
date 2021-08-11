@@ -1,6 +1,6 @@
 package com.cp.sendmq;
 
-import com.cp.sendmq.bean.Order;
+import com.cp.sendmq.entity.Order;
 import com.cp.sendmq.service.mq.RabbitSender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.cp.sendmq.rediscache;
 
-import com.cp.sendmq.bean.Order;
+import com.cp.sendmq.entity.Order;
 
 /**
  * <p>
@@ -14,4 +14,10 @@ public interface OrderService {
     Order selectOrderById(String id);
 
     String selectStringById(String id);
+
+    Order updateOrderById(String id);
+
+    Order selectOrderByparam(Order order);
+
+    void deleteOrderById(String id);
 }
