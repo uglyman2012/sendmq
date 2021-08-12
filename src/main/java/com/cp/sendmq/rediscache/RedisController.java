@@ -58,7 +58,7 @@ public class RedisController {
         Student student = new Student();
         student.setId("01");
         student.setSex("女");
-        //boolean b = studentService.updateById(student);
+        boolean b = studentService.updateById(student);
         return "success";
     }
 }
