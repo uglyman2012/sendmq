@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  *
  * </p>
  *
- * @author hehaopeng
+ * @author yyds
  * @since 2021-08-11
  */
 public class Student extends Model<Student> {

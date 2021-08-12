@@ -9,7 +9,7 @@ import com.cp.sendmq.entity.Student;
  * Mapper 接口
  * </p>
  *
- * @author hehaopeng
+ * @author yyds
  * @since 2021-08-11
  */
 public interface StudentDao extends BaseMapper<Student> {
