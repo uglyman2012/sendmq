@@ -57,8 +57,9 @@ public class RedisController {
         //Order order = new Order();
         Student student = new Student();
         student.setId("01");
-        student.setSex("女");
+        student.setSex("男");
         boolean b = studentService.updateById(student);
+        int a = 9 / 0;
         return "success";
     }
 }
