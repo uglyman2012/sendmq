@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("redisCache/test")
 @Api(tags = "redisCache测试")
@@ -56,10 +58,26 @@ public class RedisController {
     public String test2() {
         //Order order = new Order();
         Student student = new Student();
-        student.setId("01");
+        student.setId("02");
         student.setSex("男");
         boolean b = studentService.updateById(student);
-        int a = 9 / 0;
+        //int a = 9 / 0;
+        return "success";
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @GetMapping("/test3")
+    @ApiOperation("test3测试")
+    public String test3() {
+        //Order order = new Order();
+        Student student = new Student();
+        student.setId("01");
+        student.setSex("男");
+        //boolean b = studentService.deleteByid("01");
+        //boolean b = studentService.deleteBach("01");
+        //模糊查询
+        Set<String> keys = redisTemplate.keys("catalog_test_id::" + "*");
+        System.out.println(keys.toString());
         return "success";
     }
 }

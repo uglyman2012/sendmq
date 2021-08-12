@@ -15,4 +15,8 @@ import com.cp.sendmq.entity.Student;
 public interface StudentService extends IService<Student> {
 
     Student updateStudentById(String id);
+
+    boolean deleteByid(String id);
+
+    boolean deleteBach(String id);
 }

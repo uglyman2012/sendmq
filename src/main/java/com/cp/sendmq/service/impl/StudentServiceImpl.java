@@ -7,6 +7,7 @@ import com.cp.sendmq.entity.Student;
 import com.cp.sendmq.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,30 @@ public class StudentServiceImpl extends ServiceImpl<StudentDao, Student> impleme
     public boolean updateById(Student entity) {
         int i = studentDao.updateById(entity);
         System.out.println("student更新==============" + i);
+        return false;
+    }
+
+    /**
+     * 说明 beforeInvocation=true生效,前提是不存在事务中,或没开启rediscache事务
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    @CacheEvict(key = "#id", beforeInvocation = true)
+    public boolean deleteByid(String id) {
+
+        int i = studentDao.deleteById(id);
+        System.out.println("student删除==============" + i);
+        int a = 9 / 0;
+        return false;
+    }
+
+    @Override
+    @CacheEvict(allEntries = true)
+    public boolean deleteBach(String id) {
+        //int i = studentDao.deleteById(id);
+        System.out.println("student删除==============" + id);
         return false;
     }
 }
