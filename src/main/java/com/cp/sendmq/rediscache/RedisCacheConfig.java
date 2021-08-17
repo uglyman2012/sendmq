@@ -99,7 +99,7 @@ public class RedisCacheConfig {
     public CacheManager cacheManager(RedissonClient redissonClient) {
 
         /*
-           清理key策略
+           清理key策略过期策略,不是一定能清除
          */
         CacheConfig cacheConfig = new CacheConfig();
         cacheConfig.setTTL(1000 * 10);
