@@ -39,4 +39,13 @@ public class Order implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

@@ -1,11 +1,15 @@
 package com.cp.sendmq.rediscache;
 
 import com.cp.sendmq.entity.Order;
+import org.redisson.api.RedissonClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * <p>
@@ -18,14 +22,19 @@ import org.springframework.stereotype.Service;
 @CacheConfig(cacheNames = "catalog_test_id")
 @Service
 public class OrderServiceImpl implements OrderService {
+    private final AtomicLong puts = new AtomicLong();
+
+    @Autowired
+    private RedissonClient redissonClient;
+    private int a = 0;
     @Override
-    @Cacheable(cacheNames = "catalog_test_id", key = "#id")
+    @Cacheable(cacheNames = "catalog_test_id", key = "#id", sync = true)
     public Order selectOrderById(String id) {
         Order order = new Order();
         order.setId("99");
         order.setContent("ppp");
         order.setName("第一");
-        System.out.println("db查询来了==============");
+        System.out.println("db1查询来了==============");
         return order;
     }
 
@@ -37,7 +46,8 @@ public class OrderServiceImpl implements OrderService {
         order.setId("99");
         order.setContent("ppp");
         order.setName("第二");
-        System.out.println("db查询来了==============");
+        a++;
+        System.out.println(a + "db2查询来了==============");
         return order;
     }
 

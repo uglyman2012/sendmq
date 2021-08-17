@@ -14,6 +14,7 @@ import com.cp.sendmq.entity.Student;
 import com.cp.sendmq.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("redisCache/test")
@@ -34,6 +38,8 @@ public class RedisController {
     @Autowired
     private StudentService studentService;
 
+    @Autowired
+    RedissonClient redissonClient;
 
     @GetMapping("/test1")
     @ApiOperation("test1测试")
@@ -43,8 +49,25 @@ public class RedisController {
         //order.setContent("ppp");
         //order.setName("第一");
         //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //Order order = orderService.selectOrderById("007");
-        Order order1 = orderService.updateOrderById("007");
+
+        //RMap<String, String> kk = redissonClient.getMap("kk");
+        //kk.put("hh","ggg");
+        //kk.expire(40,TimeUnit.SECONDS);
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 10, 20, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+        for (int i = 1; i < 2; i++) {
+            String a = i + "";
+            threadPoolExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    Order order = orderService.selectOrderById("p1");
+                    System.out.println("第几次查询" + order.toString());
+                    //Order order1 = orderService.updateOrderById("p1");
+                    //System.out.println("第u次查询"+order1.toString());
+                }
+            });
+        }
+
+
         //String s = orderService.selectStringById("33");
         //Order order1 = orderService.selectOrderByparam(order);
         //redisTemplate.opsForValue().set("pp",order);
