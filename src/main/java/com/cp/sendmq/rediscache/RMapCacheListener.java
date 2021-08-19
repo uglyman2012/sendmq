@@ -33,6 +33,12 @@ public class RMapCacheListener implements ApplicationRunner, Ordered {
         return 1;
     }
 
+    /**
+     * 元素添加事件 | org.redisson.api.map.event.EntryCreatedListener
+     * 元素过期事件 | org.redisson.api.map.event.EntryExpiredListener
+     * 元素删除事件 | org.redisson.api.map.event.EntryRemovedListener
+     * 元素更新事件 | org.redisson.api.map.event.EntryUpdatedListener
+     */
     private void listener() {
         RMapCache<String, Integer> rMapCache = redissonClient.getMapCache("catalog_test_id");
         rMapCache.addListener(new EntryCreatedListener<String, Object>() {
