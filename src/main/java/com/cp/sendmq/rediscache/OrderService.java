@@ -1,6 +1,7 @@
 package com.cp.sendmq.rediscache;
 
 import com.cp.sendmq.entity.Order;
+import com.cp.sendmq.entity.Student;
 
 /**
  * <p>
@@ -11,11 +12,11 @@ import com.cp.sendmq.entity.Order;
  * @since 2021/08/10
  */
 public interface OrderService {
-    Order selectOrderById(String id);
+    Student selectOrderById(String id);
 
     String selectStringById(String id);
 
-    Order updateOrderById(String id);
+    Student updateOrderById(Student student);
 
     Order selectOrderByparam(Order order);
 

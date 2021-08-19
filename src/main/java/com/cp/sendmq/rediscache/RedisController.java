@@ -9,7 +9,6 @@ package com.cp.sendmq.rediscache;
  * @since 2021/08/10
  */
 
-import com.cp.sendmq.entity.Order;
 import com.cp.sendmq.entity.Student;
 import com.cp.sendmq.service.StudentService;
 import io.swagger.annotations.Api;
@@ -22,10 +21,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingDeque;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("redisCache/test")
@@ -43,6 +42,7 @@ public class RedisController {
 
     @GetMapping("/test1")
     @ApiOperation("test1测试")
+    //@Transactional(rollbackFor = Exception.class)
     public String test1() {
         //Order order = new Order();
         //order.setId("99");
@@ -53,21 +53,23 @@ public class RedisController {
         //RMap<String, String> kk = redissonClient.getMap("kk");
         //kk.put("hh","ggg");
         //kk.expire(40,TimeUnit.SECONDS);
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 10, 20, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
-        for (int i = 1; i < 2; i++) {
-            String a = i + "";
-            threadPoolExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    Order order = orderService.selectOrderById("p1");
-                    System.out.println("第几次查询" + order.toString());
-                    //Order order1 = orderService.updateOrderById("p1");
-                    //System.out.println("第u次查询"+order1.toString());
-                }
-            });
-        }
+        //ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(10, 10, 20, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+        //for (int i = 1; i < 2; i++) {
+        //    String a = i + "";
+        //    threadPoolExecutor.execute(new Runnable() {
+        //        @Override
+        //        public void run() {
+        Student student3 = orderService.selectOrderById("19");
+        System.out.println("第几次查询" + student3.toString());
 
-
+        //        }
+        //    });
+        //}
+        //Student student = new Student();
+        //student.setId("19");
+        //student.setSex("nv1");
+        //Student student1 = orderService.updateOrderById(student);
+        //System.out.println("更改"+student1.toString());
         //String s = orderService.selectStringById("33");
         //Order order1 = orderService.selectOrderByparam(order);
         //redisTemplate.opsForValue().set("pp",order);
@@ -101,6 +103,21 @@ public class RedisController {
         //模糊查询
         Set<String> keys = redisTemplate.keys("catalog_test_id::" + "*");
         System.out.println(keys.toString());
+        return "success";
+    }
+
+    @GetMapping("/test4")
+    @ApiOperation("test4测试")
+    public String test4() {
+        Student student = new Student();
+        student.setName("paopao");
+        student.setId("19");
+        student.setSex("nv");
+        LocalDateTime now = LocalDateTime.now();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateStr = sdf.format(new Date());
+        student.setAge(now);
+        boolean save = studentService.save(student);
         return "success";
     }
 }
