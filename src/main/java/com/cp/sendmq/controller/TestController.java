@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -81,4 +80,17 @@ public class TestController {
         rabbitSender.send2(order, properties);
         return "success";
     }
+
+    @GetMapping("/test4")
+    @ApiOperation("test4测试")
+    public String test4() {
+        ArrayList<String> set = new ArrayList<>();
+        int num = set.size() / 100;
+        boolean send = false;
+        for (int i = 0; i <= num; i++) {
+            Set<String> collect = set.stream().skip(i * 100).limit(100).collect(Collectors.toSet());
+        }
+        return "";
+    }
+
 }
