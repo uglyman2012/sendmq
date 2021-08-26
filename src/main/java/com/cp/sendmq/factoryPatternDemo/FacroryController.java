@@ -2,7 +2,7 @@ package com.cp.sendmq.factoryPatternDemo;
 
 /**
  * <p>
- *
+ *策略工厂模式
  * </p>
  *
  * @author yang

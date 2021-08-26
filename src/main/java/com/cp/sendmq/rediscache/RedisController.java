@@ -2,7 +2,7 @@ package com.cp.sendmq.rediscache;
 
 /**
  * <p>
- *
+ *cache缓存
  * </p>
  *
  * @author yang
