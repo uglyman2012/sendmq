@@ -99,7 +99,7 @@ public class RedisCacheConfig {
     @Bean(destroyMethod = "shutdown")
     public RedissonClient redisson() {
         Config config = new Config();
-        config.useSingleServer().setAddress("http://127.0.0.1:6379").setPingConnectionInterval(6000 * 10);
+        config.useSingleServer().setAddress("http://127.0.0.1:6379").setPingConnectionInterval(6000);
         return Redisson.create(config);
     }
 

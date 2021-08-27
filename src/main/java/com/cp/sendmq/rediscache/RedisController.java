@@ -15,6 +15,7 @@ import com.cp.sendmq.entity.Student;
 import com.cp.sendmq.service.StudentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.redisson.api.RMapCache;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,6 +167,14 @@ public class RedisController {
         String dateStr = sdf.format(new Date());
         student.setAge(now);
         boolean save = studentService.save(student);
+        return "success";
+    }
+
+    @GetMapping("/test5")
+    @ApiOperation("test5测试")
+    public String test5() {
+        RMapCache<String, String> mapCache = redissonClient.getMapCache("5h");
+        mapCache.put("d", "g", 1000, TimeUnit.SECONDS);
         return "success";
     }
 }
