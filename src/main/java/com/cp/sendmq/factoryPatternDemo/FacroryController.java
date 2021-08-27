@@ -32,7 +32,7 @@ public class FacroryController {
     @ApiOperation("test1测试")
     //@Transactional(rollbackFor = Exception.class)
     public String test1() throws Exception {
-        ReceiveHandle strategy = factoryForStrategy.getStrategy("receive1");
+        ReceiveHandle2 strategy = factoryForStrategy.getStrategy("receive3");
         String name = strategy.getName();
         return name;
     }

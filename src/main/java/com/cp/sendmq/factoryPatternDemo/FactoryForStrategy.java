@@ -16,11 +16,12 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service
 public class FactoryForStrategy {
+    //接口和抽象都可用
     @Autowired
-    Map<String, ReceiveHandle> strategys = new ConcurrentHashMap<>(3);
+    Map<String, ReceiveHandle2> strategys = new ConcurrentHashMap<>(3);
 
-    public ReceiveHandle getStrategy(String component) throws Exception {
-        ReceiveHandle strategy = strategys.get(component);
+    public ReceiveHandle2 getStrategy(String component) throws Exception {
+        ReceiveHandle2 strategy = strategys.get(component);
         if (strategy == null) {
             throw new RuntimeException("no strategy defined");
         }
