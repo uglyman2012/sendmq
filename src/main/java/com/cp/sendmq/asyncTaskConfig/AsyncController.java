@@ -42,6 +42,7 @@ public class AsyncController {
         CompletableFuture.allOf(createOrder, reduceAccount, saveLog).join();
         // 获取每个任务的返回结果
         String result = createOrder.get() + reduceAccount.get() + saveLog.get();
+        log.info("61");
         return result;
     }
 
