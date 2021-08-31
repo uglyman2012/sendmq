@@ -1,5 +1,7 @@
 package com.cp.sendmq.asyncTaskConfig;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -19,6 +21,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 @EnableAsync
 public class AsyncTaskConfig {
+    private static final Logger log = LoggerFactory.getLogger(AsyncTaskConfig.class);
     // ThredPoolTaskExcutor的处理流程
     // 当池子大小小于corePoolSize，就新建线程，并处理请求
     // 当池子大小等于corePoolSize，把请求放入workQueue中，池子里的空闲线程就去workQueue中取任务并处理
@@ -39,6 +42,7 @@ public class AsyncTaskConfig {
         threadPool.setAwaitTerminationSeconds(60);
         //线程存活时间默认60秒
         //threadPool.setKeepAliveSeconds();
+        //异步多线程中传递上下文等变量
         threadPool.setTaskDecorator(new MdcTaskDecorator());
         //  线程名称前缀
         threadPool.setThreadNamePrefix("send-Async-");
