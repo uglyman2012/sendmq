@@ -1,5 +1,7 @@
 package com.cp.sendmq.utils;
 
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -26,8 +28,8 @@ public class TraceIdFilter implements Filter {
         try {
 
             String traceId = request.getHeader(TRACE_ID);
-            //MDC.put(TRACE_ID, StringUtils.isNotBlank(traceId) ? traceId : IdWorker.getIdStr().substring(0,16));
-            MDC.put("traceId", "555555555555555");
+            MDC.put(TRACE_ID, StringUtils.isNotBlank(traceId) ? traceId : IdWorker.getIdStr().substring(0, 16));
+            //MDC.put("traceId", "555555555555555");
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception e) {
             logger.error("traceId_error: {}", e);

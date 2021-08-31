@@ -34,6 +34,7 @@ public class AsyncController {
     @ApiOperation("test1测试")
     //@Transactional(rollbackFor = Exception.class)
     public String test1() throws Exception {
+        log.error("pppppppppppppp");
         CompletableFuture<String> createOrder = asyncService.doSomething1("create order");
         CompletableFuture<String> reduceAccount = asyncService.doSomething2("reduce account");
         CompletableFuture<String> saveLog = asyncService.doSomething3("save log");

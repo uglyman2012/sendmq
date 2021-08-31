@@ -28,15 +28,18 @@ public class AsyncTaskConfig {
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
         //设置核心线程数
-        threadPool.setCorePoolSize(1);
+        threadPool.setCorePoolSize(5);
         //设置最大线程数
-        threadPool.setMaxPoolSize(1);
+        threadPool.setMaxPoolSize(10);
         //线程池所使用的缓冲队列
-        threadPool.setQueueCapacity(100);
+        threadPool.setQueueCapacity(500);
         //等待任务在关机时完成--表明等待所有线程执行完
         threadPool.setWaitForTasksToCompleteOnShutdown(true);
         // 允许线程的空闲时间60秒：当超过了核心线程之外的线程在空闲时间到达之后会被销毁
         threadPool.setAwaitTerminationSeconds(60);
+        //线程存活时间默认60秒
+        //threadPool.setKeepAliveSeconds();
+        threadPool.setTaskDecorator(new MdcTaskDecorator());
         //  线程名称前缀
         threadPool.setThreadNamePrefix("send-Async-");
         // 设置拒绝策略

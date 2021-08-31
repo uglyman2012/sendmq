@@ -23,21 +23,21 @@ public class AsyncService {
     @Async("executor")
     public CompletableFuture<String> doSomething1(String message) throws InterruptedException {
         log.error("do something1: {}", message);
-        Thread.sleep(5000);
+        //Thread.sleep(50000);
         return CompletableFuture.completedFuture("do something1: " + message);
     }
 
     @Async("executor")
     public CompletableFuture<String> doSomething2(String message) throws InterruptedException {
         log.error("do something2: {}", message);
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         return CompletableFuture.completedFuture("; do something2: " + message);
     }
 
     @Async("executor")
     public CompletableFuture<String> doSomething3(String message) throws InterruptedException {
         log.error("do something3: {}", message);
-        Thread.sleep(5000);
+        //Thread.sleep(5000);
         return CompletableFuture.completedFuture("; do something3: " + message);
     }
 }
