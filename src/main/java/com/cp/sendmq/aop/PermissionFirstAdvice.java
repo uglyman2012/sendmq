@@ -119,7 +119,6 @@ public class PermissionFirstAdvice {
         log.info("方法{}执行完毕，返回参数为：{}", classMethod, result);
         // 实际项目中可以根据业务做具体的返回值增强
         log.info("对返回参数进行业务上的增强：{}", result + "增强版");
-        return result + "增强版";
     }
 
     @AfterThrowing(pointcut = "logAdvicePointcut()", throwing = "ex")
