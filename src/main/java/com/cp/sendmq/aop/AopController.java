@@ -25,7 +25,7 @@ public class AopController {
 
     @PostMapping("/test1")
     @ApiOperation("test1测试")
-    @PermissionAnnotation
+    @PermissionAnnotation(title = "ygy")
     public String test1(@RequestBody Student student, @RequestParam String key) throws Exception {
         log.error("pppppppppppp");
         return "lllkkk";
@@ -35,7 +35,6 @@ public class AopController {
     @ApiOperation("test2测试")
     public String test2(@RequestParam String key) throws Exception {
         log.error("pppppppppppp");
-        int a = 9 / 0;
         return "lllkkk";
     }
 }

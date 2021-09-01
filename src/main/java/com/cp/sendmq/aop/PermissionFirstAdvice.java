@@ -7,12 +7,14 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 
 /**
  * <p>
@@ -67,7 +69,7 @@ public class PermissionFirstAdvice {
      * @param joinPoint
      * @throws Throwable
      */
-    @Before("logAdvicePointcut()")
+    @Before("permissionCheck()")
     public void permissionCheckOne(JoinPoint joinPoint) {
 
         log.info("====doBefore方法进入了====");
@@ -81,6 +83,14 @@ public class PermissionFirstAdvice {
         // 获取即将执行的方法名
         String funcName = signature.getName();
         log.info("即将执行方法为: {}，属于{}包", funcName, declaringTypeName);
+
+        MethodSignature methodSignature = (MethodSignature) signature;
+        Method method = methodSignature.getMethod();
+
+        if (method != null) {
+            PermissionAnnotation apiLog = method.getAnnotation(PermissionAnnotation.class);
+            log.info("切入方法注解的title:" + apiLog.title());
+        }
 
         // 也可以用来记录一些信息，比如获取请求的 URL 和 IP
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
