@@ -112,7 +112,7 @@ public class PermissionFirstAdvice {
      * @return
      */
     @AfterReturning(pointcut = "logAdvicePointcut()", returning = "result")
-    public String doAfterReturning(JoinPoint joinPoint, Object result) {
+    public void doAfterReturning(JoinPoint joinPoint, Object result) {
 
         Signature signature = joinPoint.getSignature();
         String classMethod = signature.getName();
