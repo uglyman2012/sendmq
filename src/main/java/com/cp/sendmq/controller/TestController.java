@@ -5,6 +5,7 @@ import com.cp.sendmq.entity.Order;
 import com.cp.sendmq.entity.SysPersonalInfo;
 import com.cp.sendmq.service.SendService;
 import com.cp.sendmq.service.mq.RabbitSender;
+import com.starter.demo.demo.TianService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.core.Message;
@@ -40,6 +41,8 @@ public class TestController {
     @Autowired
     private RabbitSender rabbitSender;
 
+    @Autowired
+    private TianService tianService;
     //@Autowired
     //private Sender sender;
     @GetMapping("/test1")
@@ -93,4 +96,15 @@ public class TestController {
         return "";
     }
 
+    /**
+     * 自动装配测试
+     *
+     * @return
+     */
+    @GetMapping("/test5")
+    @ApiOperation("test5测试")
+    public String test5() {
+        tianService.sayHello();
+        return "66";
+    }
 }
